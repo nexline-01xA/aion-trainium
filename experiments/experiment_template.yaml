@@ -1,0 +1,27 @@
+# Copy this file per experiment. Fill in every field before launching a run.
+# Fields marked TODO require the official AWS starter repo to resolve.
+
+experiment_id: "EXXX"          # e.g. E001, E002 — must match experiments.csv
+hypothesis_id: null            # e.g. H1, H3 — see docs/research_hypotheses.md
+hypothesis: ""                 # one-line description of what you're testing
+change: ""                     # exact code/config change from baseline
+
+config_ref: "configs/baseline.yaml"   # base config this experiment modifies
+overrides: {}                  # key: value overrides applied on top of config_ref
+
+seed: 0
+repeat_seeds: []                # additional seeds if this hypothesis requires
+                                 # multi-seed validation (see research_hypotheses.md)
+
+# --- Fields populated automatically by run_experiment.py after the run ---
+git_commit: null                # TODO: filled from `git rev-parse HEAD`
+wall_clock_seconds: null        # TODO: from official pipeline
+steps: null
+tokens_processed: null
+tokens_per_second: null
+compile_time_seconds: null
+val_bpb: null
+delta_vs_baseline: null
+
+notes: ""
+verdict: "RETEST"               # KEEP | REJECT | RETEST | BASELINE

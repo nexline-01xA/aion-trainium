@@ -1,0 +1,1 @@
+experiment_id,timestamp,git_commit,hypothesis,change,config,parameter_count,sequence_length,batch_size,learning_rate,optimizer,precision,wall_clock_seconds,steps,tokens_processed,tokens_per_second,val_bpb,delta_vs_baseline,compile_time_seconds,notes,verdict

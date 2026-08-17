@@ -1,0 +1,36 @@
+# Compute annealing experiment config.
+# Extends configs/baseline.yaml — apply baseline.yaml first, then these
+# overrides (scripts/run_experiment.py handles the merge).
+#
+# This defines a *schedule abstraction* only (see
+# src/aion/schedules/compute_annealing.py). It is not yet attached to a
+# real model, since we don't have the AWS starter model code.
+#
+# Stage boundaries and fractions below are starting priors for the
+# "minimal two-stage" experiment (see docs/competition_strategy.md, #20).
+# They must be tuned empirically once real runs are possible — do not
+# treat these numbers as final.
+
+aion:
+  compute_annealing:
+    enabled: true
+    # Piecewise-linear schedule: list of (progress_fraction, capacity) points.
+    # progress_fraction is training progress in [0.0, 1.0].
+    stages:
+      - progress: 0.0
+        active_layer_fraction: 0.5
+        mlp_width_fraction: 0.5
+        sequence_length_fraction: 0.5
+      - progress: 0.2
+        active_layer_fraction: 0.75
+        mlp_width_fraction: 0.75
+        sequence_length_fraction: 0.75
+      - progress: 0.65
+        active_layer_fraction: 1.0
+        mlp_width_fraction: 1.0
+        sequence_length_fraction: 1.0
+      - progress: 1.0
+        active_layer_fraction: 1.0
+        mlp_width_fraction: 1.0
+        sequence_length_fraction: 1.0
+    interpolation: "linear"

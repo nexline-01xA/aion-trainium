@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Experiment artifacts (real run outputs, not checked in by default)
+experiments/results/*
+!experiments/results/.gitkeep
+*.ckpt
+*.pt
+*.bin
+*.npz
+
+# Profiler output
+*.ntff
+*.neuron-profile/
+profiler_output/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# AWS starter pipeline (integrated locally, not vendored into this repo
+# until we know the official license/distribution terms)
+aws_starter/

@@ -1,0 +1,26 @@
+# Block-level conditional compute experiment config.
+# Extends configs/baseline.yaml.
+#
+# Routes computation at the granularity of fixed contiguous token blocks,
+# NOT per-token, to keep Trainium2 matmul tiles regular. See
+# src/aion/routing/block_router.py and docs/research_hypotheses.md (H4).
+
+aion:
+  conditional_compute:
+    enabled: true
+    mode: "fixed_ratio"          # always_full | fixed_ratio | scheduled_ratio | score_based
+    block_size_tokens: 128       # prior; must be validated against real
+                                  # sequence length / tile size once known
+    full_compute_fraction: 0.5   # used by fixed_ratio mode
+
+    # Used only by scheduled_ratio mode: full_compute_fraction ramps
+    # linearly between these two values over training progress.
+    scheduled_ratio:
+      start_fraction: 0.25
+      end_fraction: 0.9
+
+    # score_based mode: interface only, not implemented yet.
+    # See src/aion/routing/block_router.py — ScoreFn is a placeholder.
+    score_based:
+      signal: null                # TODO: e.g. "hidden_state_norm", "pred_entropy"
+      threshold: null              # TODO

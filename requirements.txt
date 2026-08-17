@@ -1,0 +1,9 @@
+# Core, hardware-independent dependencies.
+# Trainium/Neuron-specific packages (torch-neuronx, neuronx-cc, etc.) are
+# intentionally NOT pinned here yet — they will be added once the official
+# AWS Trainium Frontier starter repository specifies exact Neuron SDK
+# versions. See docs/reproducibility.md.
+
+pyyaml>=6.0
+pandas>=2.0
+pytest>=8.0

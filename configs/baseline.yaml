@@ -1,0 +1,59 @@
+# Baseline configuration.
+#
+# Every value marked `null  # TODO: from AWS starter repo` is genuinely
+# unknown until we have the official pipeline — do NOT fill these with
+# guessed numbers to make the file "look complete." The schema (which keys
+# exist, and their types) is a reasonable prior based on public
+# nanochat-lineage pipelines, but the values are not.
+
+model:
+  architecture: "decoder_only_transformer"   # prior, unconfirmed
+  hidden_size: null            # TODO: from AWS starter repo
+  num_layers: null             # TODO: from AWS starter repo
+  num_heads: null              # TODO: from AWS starter repo
+  head_dim: null                # TODO: from AWS starter repo
+  mlp_expansion_ratio: null     # TODO: from AWS starter repo
+  activation: "relu2"           # prior, unconfirmed
+  norm: "rmsnorm"                # prior, unconfirmed
+  positional_encoding: "rope"    # prior, unconfirmed
+  vocab_size: null              # TODO: from AWS starter repo
+  tie_embeddings: null          # TODO: from AWS starter repo (bool)
+  dropout: 0.0
+
+training:
+  wall_clock_budget_seconds: 1800   # fixed by competition rules (30 min)
+  sequence_length: null             # TODO: from AWS starter repo
+  global_batch_size: null           # TODO: from AWS starter repo
+  gradient_accumulation_steps: 1    # TODO: confirm against starter repo
+  seed: 0
+
+optimizer:
+  hidden_layer_optimizer: "muon"    # prior, unconfirmed
+  other_params_optimizer: "adamw"   # prior, unconfirmed
+  learning_rate: null               # TODO: from AWS starter repo
+  weight_decay: null                # TODO: from AWS starter repo
+  warmup_steps: null                # TODO: from AWS starter repo
+  lr_schedule: "trapezoidal"        # prior, unconfirmed
+  grad_clip_norm: null              # TODO: from AWS starter repo
+
+runtime:
+  device: "trainium2"
+  num_chips: 1                      # fixed by Phase 1 competition rules
+  precision: null                   # TODO: from AWS starter repo (e.g. bf16)
+  neuron_sdk_version: null          # TODO: fill in once environment is provisioned
+  graph_caching_enabled: null       # TODO: verify against starter repo
+
+evaluation:
+  metric: "val_bpb"                 # fixed by competition rules
+  eval_dataset: null                # TODO: from AWS starter repo
+  eval_interval_steps: null         # TODO: from AWS starter repo
+
+# AION-specific extensions — disabled by default in the baseline config.
+# Enabled explicitly via configs/compute_annealing.yaml or
+# configs/conditional_compute.yaml.
+aion:
+  compute_annealing:
+    enabled: false
+  conditional_compute:
+    enabled: false
+    mode: "always_full"
